@@ -272,10 +272,8 @@ func (g *Builder) buildSchema(sch *schema.Schema, cfg *config.Resource, tfPath [
 				return nil, errors.Wrapf(err, "cannot infer type from resource schema of element type of %s", fieldPath(names))
 			}
 			ts = make([]typeWrapper, 0)
-			if obsType != nil {
-				ts = append(ts, typeWrapper{obsType, true})
-			}
-			if paramType != nil {
+			ts = append(ts, typeWrapper{obsType, true})
+			if !isObservation(sch) {
 				ts = append(ts, typeWrapper{paramType, false})
 			}
 			elemTypes := make([]typeWrapper, 0)
