@@ -18,7 +18,6 @@ package controller
 
 import (
 	"context"
-
 	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/pkg/errors"
@@ -77,9 +76,9 @@ type APICallbacks struct {
 }
 
 // Apply makes sure the error is saved in async operation condition.
-func (ac *APICallbacks) Apply(name string) terraform.CallbackFn {
+func (ac *APICallbacks) Apply(name, namespace string) terraform.CallbackFn {
 	return func(err error, ctx context.Context) error {
-		nn := types.NamespacedName{Name: name}
+		nn := types.NamespacedName{Name: name, Namespace: namespace}
 		tr := ac.newTerraformed()
 		if kErr := ac.kube.Get(ctx, nn, tr); kErr != nil {
 			return errors.Wrap(kErr, errGet)
@@ -91,9 +90,9 @@ func (ac *APICallbacks) Apply(name string) terraform.CallbackFn {
 }
 
 // Destroy makes sure the error is saved in async operation condition.
-func (ac *APICallbacks) Destroy(name string) terraform.CallbackFn {
+func (ac *APICallbacks) Destroy(name, namespace string) terraform.CallbackFn {
 	return func(err error, ctx context.Context) error {
-		nn := types.NamespacedName{Name: name}
+		nn := types.NamespacedName{Name: name, Namespace: namespace}
 		tr := ac.newTerraformed()
 		if kErr := ac.kube.Get(ctx, nn, tr); kErr != nil {
 			return errors.Wrap(kErr, errGet)
