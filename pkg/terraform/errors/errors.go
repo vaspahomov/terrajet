@@ -86,6 +86,9 @@ func newTFError(message string, logs []byte) (string, *tfError) {
 		}
 		messages = append(messages, m)
 	}
+	if len(messages) == 0 {
+		return "", nil
+	}
 	tfError.message = fmt.Sprintf("%s: %s", message, strings.Join(messages, "\n"))
 	return "", tfError
 }
@@ -110,6 +113,9 @@ func parseTerraformLogs(logs []byte) ([]*TerraformLog, error) {
 // NewApplyFailed returns a new apply failure error with given logs.
 func NewApplyFailed(logs []byte) error {
 	parseError, tfError := newTFError("apply failed", logs)
+	if tfError == nil {
+		return nil
+	}
 	result := &applyFailed{tfError: tfError}
 	if parseError == "" {
 		return result
@@ -130,6 +136,9 @@ type destroyFailed struct {
 // NewDestroyFailed returns a new destroy failure error with given logs.
 func NewDestroyFailed(logs []byte) error {
 	parseError, tfError := newTFError("destroy failed", logs)
+	if tfError == nil {
+		return nil
+	}
 	result := &destroyFailed{tfError: tfError}
 	if parseError == "" {
 		return result
@@ -150,6 +159,9 @@ type refreshFailed struct {
 // NewRefreshFailed returns a new destroy failure error with given logs.
 func NewRefreshFailed(logs []byte) error {
 	parseError, tfError := newTFError("refresh failed", logs)
+	if tfError == nil {
+		return nil
+	}
 	result := &refreshFailed{tfError: tfError}
 	if parseError == "" {
 		return result
@@ -170,6 +182,9 @@ type planFailed struct {
 // NewPlanFailed returns a new destroy failure error with given logs.
 func NewPlanFailed(logs []byte) error {
 	parseError, tfError := newTFError("plan failed", logs)
+	if tfError == nil {
+		return nil
+	}
 	result := &planFailed{tfError: tfError}
 	if parseError == "" {
 		return result
