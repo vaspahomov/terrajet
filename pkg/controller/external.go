@@ -196,7 +196,7 @@ func (e *external) Observe(ctx context.Context, mg xpresource.Managed) (managed.
 
 func (e *external) Create(ctx context.Context, mg xpresource.Managed) (managed.ExternalCreation, error) {
 	if e.config.UseAsync {
-		return managed.ExternalCreation{}, errors.Wrap(e.workspace.ApplyAsync(e.callback.Apply(mg.GetName())), errStartAsyncApply)
+		return managed.ExternalCreation{}, errors.Wrap(e.workspace.ApplyAsync(e.callback.Apply(mg.GetName(), mg.GetNamespace())), errStartAsyncApply)
 	}
 	tr, ok := mg.(resource.Terraformed)
 	if !ok {
@@ -223,7 +223,7 @@ func (e *external) Create(ctx context.Context, mg xpresource.Managed) (managed.E
 
 func (e *external) Update(ctx context.Context, mg xpresource.Managed) (managed.ExternalUpdate, error) {
 	if e.config.UseAsync {
-		return managed.ExternalUpdate{}, errors.Wrap(e.workspace.ApplyAsync(e.callback.Apply(mg.GetName())), errStartAsyncApply)
+		return managed.ExternalUpdate{}, errors.Wrap(e.workspace.ApplyAsync(e.callback.Apply(mg.GetName(), mg.GetNamespace())), errStartAsyncApply)
 	}
 	tr, ok := mg.(resource.Terraformed)
 	if !ok {
@@ -242,7 +242,7 @@ func (e *external) Update(ctx context.Context, mg xpresource.Managed) (managed.E
 
 func (e *external) Delete(ctx context.Context, mg xpresource.Managed) error {
 	if e.config.UseAsync {
-		return errors.Wrap(e.workspace.DestroyAsync(e.callback.Destroy(mg.GetName())), errStartAsyncDestroy)
+		return errors.Wrap(e.workspace.DestroyAsync(e.callback.Destroy(mg.GetName(), mg.GetNamespace())), errStartAsyncDestroy)
 	}
 	return errors.Wrap(e.workspace.Destroy(ctx), errDestroy)
 }
