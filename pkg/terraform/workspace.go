@@ -294,3 +294,24 @@ func (w *Workspace) Plan(ctx context.Context) (PlanResult, error) {
 		UpToDate: p.Changes.Change == 0,
 	}, nil
 }
+
+// ImportResult contains information about importing state of the resource.
+type ImportResult struct {
+}
+
+// Import makes a blocking terraform import call.
+func (w *Workspace) Import(ctx context.Context) (ImportResult, error) {
+	// The last operation is still ongoing.
+	if w.LastOperation.IsRunning() {
+		return ImportResult{}, errors.Errorf("%s operation that started at %s is still running", w.LastOperation.Type, w.LastOperation.StartTime().String())
+	}
+	cmd := w.executor.CommandContext(ctx, "terraform", "import", "-input=false", "-lock=false")
+	cmd.SetEnv(append(os.Environ(), w.env...))
+	cmd.SetDir(w.dir)
+	out, _ := cmd.CombinedOutput()
+	w.logger.Debug("import ended", "out", string(out))
+	if err := tferrors.NewPlanFailed(out); err != nil {
+		return ImportResult{}, err
+	}
+	return ImportResult{}, nil
+}

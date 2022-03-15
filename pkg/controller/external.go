@@ -35,6 +35,7 @@ const (
 	errUnexpectedObject  = "the custom resource is not a Terraformed resource"
 	errGetTerraformSetup = "cannot get terraform setup"
 	errGetWorkspace      = "cannot get a terraform workspace for resource"
+	errImport            = "cannot run import"
 	errRefresh           = "cannot run refresh"
 	errPlan              = "cannot run plan"
 	errStartAsyncApply   = "cannot start async apply"
@@ -119,6 +120,9 @@ func (e *external) Observe(ctx context.Context, mg xpresource.Managed) (managed.
 	tr, ok := mg.(resource.Terraformed)
 	if !ok {
 		return managed.ExternalObservation{}, errors.New(errUnexpectedObject)
+	}
+	if _, err := e.workspace.Import(ctx); err != nil {
+		return managed.ExternalObservation{}, errors.Wrap(err, errImport)
 	}
 	res, err := e.workspace.Refresh(ctx)
 	if err != nil {
