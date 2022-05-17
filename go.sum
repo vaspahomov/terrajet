@@ -686,8 +686,8 @@ github.com/tv42/httpunix v0.0.0-20150427012821-b75d8614f926/go.mod h1:9ESjWnEqri
 github.com/ulikunitz/xz v0.5.5/go.mod h1:2bypXElzHzzJZwzH67Y6wb67pO62Rzfn7BSiF4ABRW8=
 github.com/ulikunitz/xz v0.5.8 h1:ERv8V6GKqVi23rgu5cj9pVfVzJbOqAY2Ntl88O6c2nQ=
 github.com/ulikunitz/xz v0.5.8/go.mod h1:nbz6k7qbPmH4IRqmfOplQw/tblSgqTqBwxkY0oWt/14=
-github.com/vaspahomov/crossplane-runtime v0.14.1-0.20220421225308-0e8935d6d9a9 h1:095jaBF4xnc6BrCi7raI8NbhsF48SK9K36MV5Kkhpqc=
-github.com/vaspahomov/crossplane-runtime v0.14.1-0.20220421225308-0e8935d6d9a9/go.mod h1:IPT3HTsovwmbw3i+SdsOyaC3r3b7TW+otBMmZsHLnSU=
+github.com/vaspahomov/crossplane-runtime v0.14.1-0.20220517110058-d8d6afbcabf2 h1:qEYnPbiwhb1ZlXkrtJTpg3BKea2Yxku/scywyIAjw74=
+github.com/vaspahomov/crossplane-runtime v0.14.1-0.20220517110058-d8d6afbcabf2/go.mod h1:IPT3HTsovwmbw3i+SdsOyaC3r3b7TW+otBMmZsHLnSU=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
 github.com/vmihailenco/msgpack v4.0.4+incompatible h1:dSLoQfGFAo3F6OoNhwUmLwVgaUXK79GlxNBwueZn0xI=
 github.com/vmihailenco/msgpack v4.0.4+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=

@@ -125,4 +125,4 @@ require (
 // Terraform providers still using v1 sdk.
 replace github.com/hashicorp/terraform-plugin-sdk => github.com/turkenh/terraform-plugin-sdk v1.17.2-patch1
 
-replace github.com/crossplane/crossplane-runtime => github.com/vaspahomov/crossplane-runtime v0.14.1-0.20220421225308-0e8935d6d9a9
+replace github.com/crossplane/crossplane-runtime => github.com/vaspahomov/crossplane-runtime v0.14.1-0.20220517110058-d8d6afbcabf2
